@@ -1,13 +1,13 @@
 import {Movie} from "./Movie";
 
 function Movies(prors){
-    const {movies} = prors;
+    const {movies = []} = prors;
 
     return <div className="movies">
-        {
-            movies.map(movie =>
+        { movies.length ?
+            movies.map(movie =>(
                 <Movie key={movie.imdbID} {...movie}/>
-            )
+            )) : <h4>Nothing found</h4>
         }
     </div>
 
