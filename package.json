@@ -2,6 +2,7 @@
   "name": "movies-project",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://magamed-ali.github.io/movies-project",
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
@@ -20,7 +21,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -41,6 +44,7 @@
     ]
   },
   "devDependencies": {
-    "ember-cli-materialize": "^0.22.0"
+    "ember-cli-materialize": "^0.22.0",
+    "gh-pages": "^4.0.0"
   }
 }
