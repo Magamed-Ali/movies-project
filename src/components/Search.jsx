@@ -1,27 +1,21 @@
-import React from "react";
+import React, {useState} from "react";
 
-export default class Search extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            search: '',
-            type: 'all'
-        }
-    }
+const Search = (props) => {
+    const {searchMovies = Function.prototype} = props;
 
-    handleKey = (event) => {
+    const [search, setSearch] = useState('');
+    const [type, setType] = useState('all')
+
+    const handleKey = (event) => {
         if(event.key === 'Enter'){
-            this.props.searchMovies(this.state.search, this.state.type);
+            searchMovies(search, type);
         }
     }
 
-    handleChange = (event) => {
-        this.setState( () => ({type: event.target.dataset.type}), () => {
-            this.props.searchMovies(this.state.search, this.state.type);
-        })
+    const handleChange = (event) => {
+        setType(event.target.dataset.type);
+        searchMovies(search, type);
     }
-
-    render() {
 
         return(
             <div className="row">
@@ -31,13 +25,13 @@ export default class Search extends React.Component{
                             placeholder="Search"
                             type="search"
                             className="validate"
-                            value={this.state.search}
-                            onChange={(e) => this.setState({search: e.target.value})}
-                            onKeyDown={this.handleKey}
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            onKeyDown={handleKey}
                         />
                         <button
                             className="btn search-btn"
-                            onClick={() =>  this.props.searchMovies(this.state.search, this.state.type)}>Search</button>
+                            onClick={() =>  searchMovies(search, type)}>Search</button>
                     </div>
 
                     <div className="checked">
@@ -47,8 +41,8 @@ export default class Search extends React.Component{
                                     className="with-gap"
                                     name="type"
                                     type="radio"
-                                    checked={this.state.type === "all"}
-                                    onChange={this.handleChange}
+                                    checked={type === "all"}
+                                    onChange={handleChange}
                                     data-type="all"
                                 />
                                 <span>All</span>
@@ -60,8 +54,8 @@ export default class Search extends React.Component{
                                     className="with-gap"
                                     name="type"
                                     type="radio"
-                                    checked={this.state.type === "movie"}
-                                    onChange={this.handleChange}
+                                    checked={type === "movie"}
+                                    onChange={handleChange}
                                     data-type="movie"
                                 />
                                 <span>Moves only</span>
@@ -73,8 +67,8 @@ export default class Search extends React.Component{
                                     className="with-gap"
                                     name="type"
                                     type="radio"
-                                    checked={this.state.type === "series"}
-                                    onChange={this.handleChange}
+                                    checked={type === "series"}
+                                    onChange={handleChange}
                                     data-type="series"
                                 />
                                 <span>Series only</span>
@@ -84,5 +78,5 @@ export default class Search extends React.Component{
                 </div>
             </div>
         )
-    }
 }
+export default Search;
