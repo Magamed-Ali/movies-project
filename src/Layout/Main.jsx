@@ -15,7 +15,10 @@ const Main = () => {
     useEffect(()=>{
         fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${name}`)
             .then(response => response.json())
-            .then(data =>setMovies(data.Search), setLoading(false))
+            .then(data =>{
+                setMovies(data.Search);
+                setLoading(false)
+            } )
             .catch((err) => {
                 console.error(err)
                 setLoading(false)
@@ -27,7 +30,10 @@ const Main = () => {
         setLoading(true)
         fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${str}${type !== 'all' ? `&type=${type}` : ''}`)
             .then(response => response.json())
-            .then(data =>setMovies(data.Search), setLoading(false))
+            .then(data =>{
+                setMovies(data.Search);
+                setLoading(false)
+            } )
             .catch((err) => {
                 console.error(err)
                 setLoading(false)
